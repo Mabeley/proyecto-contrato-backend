@@ -24,6 +24,7 @@ public class Usuario  {
 	private String clave;
 	@Column(name = "CPERFIL")
 	private String perfil;
+	private transient String token;
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -73,4 +74,12 @@ public class Usuario  {
 		this.perfil = perfil;
 	}
 
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+	
 }

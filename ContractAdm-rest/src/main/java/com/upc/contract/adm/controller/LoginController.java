@@ -11,4 +11,7 @@ public interface LoginController {
 	
 	@PostMapping("/acceso")
 	ResponseCore validarAcceso(@RequestBody Usuario usuario);
+	
+	@PostMapping("/cambiar")
+	ResponseCore actualizar(@RequestBody Usuario usuario);
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.upc.contract.adm.controller.LoginController;
+import com.upc.contract.adm.util.TokenUtil;
 import com.upc.contract.core.entity.Usuario;
 import com.upc.contract.core.service.UsuarioService;
 import com.upc.contract.core.util.ConstantesCore;
@@ -23,6 +24,9 @@ import com.upc.contract.core.util.UtilCore;
 public class LoginControllerImpl implements LoginController {
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	TokenUtil tokenUtil;
+	
 	Logger logger = LoggerFactory.getLogger(LoginControllerImpl.class);
 
 	@Override
@@ -38,6 +42,7 @@ public class LoginControllerImpl implements LoginController {
 				response.setMensajeRespuesta("usuario o clave incorrectos");
 			}else {
 				Map<String, Object> parametro = new HashMap<>();
+				oUsuario.setToken(this.tokenUtil.getJWTToken(usuario.getCodUsuario()));
 				parametro.put("usuario", oUsuario);
 				response.setParametros(parametro);
 				response.setEstadoRespuesta(ConstantesCore.RSP_OK);
@@ -49,6 +54,13 @@ public class LoginControllerImpl implements LoginController {
 			response.setMensajeRespuesta(e.getMessage());
 		}
 		return response;
+	}
+
+	@Override
+	@PostMapping("/cambiar")
+	public ResponseCore actualizar(Usuario usuario) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

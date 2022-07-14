@@ -18,4 +18,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return usuarioRepository.userValidate(usuario, clave);
 	}
 
+	@Override
+	public Usuario userUpdate(Usuario oUsuario) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
