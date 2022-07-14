@@ -45,7 +45,7 @@ public class JmsNotificacion {
             document.close();
             System.out.println("PDF creado");
             byte[] contratoFirmado = utilService.firmarPdf(baos.toByteArray());
-			utilService.enviarCorreo(map);
+			utilService.enviarCorreoAdjunto(map, contratoFirmado);
 			System.out.println("mensaje enviado");
 			
 		} catch (Exception e) {
