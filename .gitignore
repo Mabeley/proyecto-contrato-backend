@@ -7,5 +7,10 @@ ContractAdm-rest/.classpath
 ContractAdm-rest/.settings/
 ContractAdm-rest/logs/
 ContractAdm-rest/target/
+Util-rest/.project
+Util-rest/.classpath
+Util-rest/.settings/
+Util-rest/logs/
+Util-rest/target/
 /.metadata/
 RemoteSystemsTempFiles/
