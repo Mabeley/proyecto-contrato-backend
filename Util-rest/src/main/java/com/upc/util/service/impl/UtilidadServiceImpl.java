@@ -14,8 +14,21 @@ import org.springframework.stereotype.Service;
 
 import com.upc.util.service.UtilidadService;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.security.KeyStore;
+import java.security.PrivateKey;
+
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfSignatureAppearance;
+import com.itextpdf.text.pdf.PdfStamper;
+
 @Service
 public class UtilidadServiceImpl implements UtilidadService {
+	
+	private static String CERTIFICADO = "/opt/Certificado.pfx";
+	private static String CLAVE = "12345678";
 
 	@Override
 	public String enviarCorreo(Map<String, Object> datos) throws Exception {
@@ -46,8 +59,8 @@ public class UtilidadServiceImpl implements UtilidadService {
 		props.put("mail.smtp.socketFactory.port", "465");
 		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
-		final String username = "...";
-		final String password = "...";
+		final String username = "sistemas.testing.ti@gmail.com";
+		final String password = "twctwbkltlupnlty";
 
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -57,6 +70,36 @@ public class UtilidadServiceImpl implements UtilidadService {
 
 		return session;
 
+	}
+
+	@Override
+	public byte[] firmarPdf(byte[] data) throws Exception {
+		try {
+			PdfReader reader = null;
+			reader = new PdfReader(data);
+			
+			KeyStore keystore = KeyStore.getInstance("PKCS12");
+			InputStream in = new FileInputStream(CERTIFICADO);
+            keystore.load(in, CLAVE.toCharArray());
+            in.close();
+			
+            String alias = (String) keystore.aliases().nextElement();
+            PrivateKey pk = (PrivateKey) keystore.getKey(alias, CLAVE.toCharArray());
+            java.security.cert.Certificate[] chain = keystore.getCertificateChain(alias);
+            
+    		ByteArrayOutputStream nuevoDocumento = new ByteArrayOutputStream();
+            PdfStamper stp = PdfStamper.createSignature(reader, nuevoDocumento, '\000', null, true);
+            PdfSignatureAppearance sap = stp.getSignatureAppearance();
+            sap.setCrypto(pk, chain, null, PdfSignatureAppearance.WINCER_SIGNED);
+            sap.setReason("Firma de Contrato");
+            sap.setLocation("Lima");
+            stp.close();
+            return nuevoDocumento.toByteArray();
+            
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
