@@ -1,0 +1,11 @@
+Contract-core/.project
+Contract-core/.classpath
+Contract-core/.settings/
+Contract-core/target/
+ContractAdm-rest/.project
+ContractAdm-rest/.classpath
+ContractAdm-rest/.settings/
+ContractAdm-rest/logs/
+ContractAdm-rest/target/
+/.metadata/
+RemoteSystemsTempFiles/
