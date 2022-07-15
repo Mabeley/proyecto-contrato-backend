@@ -20,8 +20,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario userUpdate(Usuario oUsuario) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return usuarioRepository.save(oUsuario);
 	}
 
 }

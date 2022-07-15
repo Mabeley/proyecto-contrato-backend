@@ -116,8 +116,7 @@ public class ProcesoServiceImpl implements ProcesoService {
 			data.put("para", colaborador.getCorreo());
 			data.put("asunto", "Contrato Digital - "+colaborador.getDni());
 			data.put("contenido", "Estimado "+colaborador.getNombreApellido()+":<br>"
-					+ "Puede visualizar su contrato ingresando al siguiente link:<br><br>"
-					+ "<a href=\"http://"+System.getenv("IPPUBLICA")+":8886/pki/contrato/"+envio.getIdEnvio()+""+colaborador.getDni()+"\">Ver Contrato</a><br><br>"
+					+ "Puede visualizar su contrato descargando el archivo adjunto<br><br>"
 					+ "Atentamente,<br>Sistemas UPC");
 			
 			ObjectMapper mapper = new ObjectMapper();

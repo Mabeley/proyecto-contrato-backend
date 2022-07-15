@@ -81,8 +81,8 @@ public class UtilidadServiceImpl implements UtilidadService {
 		props.put("mail.smtp.socketFactory.port", "465");
 		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
-		final String username = "...";
-		final String password = "...";
+		final String username = "sistemas.testing.ti@gmail.com";
+		final String password = "twctwbkltlupnlty";
 
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
